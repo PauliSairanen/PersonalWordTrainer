@@ -66,28 +66,28 @@ class LanguageCollectionViewController: UICollectionViewController {
 	
 	
 	@IBAction func addButtonPressed(_ sender: Any) {
-		var nameField = UITextField()
-		var emojiField = UITextField()
-		let alert = UIAlertController(title: "Add new Language", message: "", preferredStyle: .alert)
-		let action = UIAlertAction(title: "Add Language", style: .default) { (action) in
-			if let textToAdd = nameField.text {
-				let newLanguage = LanguageItem(context: self.context)
-				newLanguage.name = nameField.text
-				newLanguage.flag = emojiField.text
-				self.languageArray.append(newLanguage)
-				self.saveItems()
-			}
-		}
-		alert.addTextField { (languageNameField) in
-			languageNameField.placeholder = "Name of the language"
-			nameField = languageNameField
-		}
-		alert.addTextField { (flagEmojiField) in
-			flagEmojiField.placeholder = "Add a flag emoji here"
-			emojiField = flagEmojiField
-		}
-		alert.addAction(action)
-		present(alert, animated: true, completion: nil)
+//		var nameField = UITextField()
+//		var emojiField = UITextField()
+//		let alert = UIAlertController(title: "Add new Language", message: "", preferredStyle: .alert)
+//		let action = UIAlertAction(title: "Add Language", style: .default) { (action) in
+//			if let textToAdd = nameField.text {
+//				let newLanguage = LanguageItem(context: self.context)
+//				newLanguage.name1 = nameField.text
+//				newLanguage.flag1 = emojiField.text
+//				self.languageArray.append(newLanguage)
+//				self.saveItems()
+//			}
+//		}
+//		alert.addTextField { (languageNameField) in
+//			languageNameField.placeholder = "Name of the language"
+//			nameField = languageNameField
+//		}
+//		alert.addTextField { (flagEmojiField) in
+//			flagEmojiField.placeholder = "Add a flag emoji here"
+//			emojiField = flagEmojiField
+//		}
+//		alert.addAction(action)
+//		present(alert, animated: true, completion: nil)
 	}
 	
 	

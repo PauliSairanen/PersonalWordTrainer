@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="LanguageItem" representedClassName=".LanguageItem" syncable="YES" codeGenerationType="class">
-        <attribute name="flag" optional="YES" attributeType="String"/>
-        <attribute name="name" attributeType="String"/>
+        <attribute name="flag1" optional="YES" attributeType="String"/>
+        <attribute name="flag2" optional="YES" attributeType="String"/>
+        <attribute name="name1" attributeType="String"/>
+        <attribute name="name2" attributeType="String"/>
     </entity>
     <elements>
-        <element name="LanguageItem" positionX="-63" positionY="-18" width="128" height="59"/>
+        <element name="LanguageItem" positionX="-63" positionY="-18" width="128" height="89"/>
     </elements>
 </model>

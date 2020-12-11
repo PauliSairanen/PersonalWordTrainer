@@ -12,10 +12,11 @@ class LanguageTableViewController: UITableViewController {
 
 	var languageArray = [LanguageItem]()
 	let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+	let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		print(dataFilePath)
 		tableView.register(UINib(nibName: "LanguageTableViewCell", bundle: nil), forCellReuseIdentifier: "LanguageTableViewCell")
 		loadItems()
     }
@@ -24,19 +25,28 @@ class LanguageTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return languageArray.count
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-		return 1
+		return languageArray.count
     }
+	
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return 100
+	}
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LanguageTableViewCell", for: indexPath) as! LanguageTableViewCell
-		cell.languageName1.text = languageArray[indexPath.row].name
-		cell.languageEmoji1.text = languageArray[indexPath.row].flag
+		cell.languageName1.text = languageArray[indexPath.item].name1
+		cell.languageEmoji1.text = languageArray[indexPath.item].flag1
+		
+		cell.languageName2.text = languageArray[indexPath.item].name2
+		cell.languageEmoji2.text = languageArray[indexPath.item].flag2
+		
+		print(languageArray[indexPath.item])
         // Configure the cell...
 
         return cell
@@ -55,24 +65,14 @@ class LanguageTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+			context.delete(languageArray[indexPath.item])
+			languageArray.remove(at: indexPath.item)
             tableView.deleteRows(at: [indexPath], with: .fade)
+			saveItems()
+			
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
-    }
-
-
-  
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
     }
  
  
@@ -85,25 +85,38 @@ class LanguageTableViewController: UITableViewController {
     }
 	
 	@IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
-		var nameField = UITextField()
-		var emojiField = UITextField()
+		var nameField1 = UITextField()
+		var emojiField1 = UITextField()
+		var nameField2 = UITextField()
+		var emojiField2 = UITextField()
 		let alert = UIAlertController(title: "Add new Language", message: "", preferredStyle: .alert)
 		let action = UIAlertAction(title: "Add Language", style: .default) { (action) in
-			if let textToAdd = nameField.text {
+			if let textToAdd = nameField1.text {
 				let newLanguage = LanguageItem(context: self.context)
-				newLanguage.name = nameField.text
-				newLanguage.flag = emojiField.text
+				newLanguage.name1 = nameField1.text
+				newLanguage.flag1 = emojiField1.text
+				
+				newLanguage.name2 = nameField2.text
+				newLanguage.flag2 = emojiField2.text
 				self.languageArray.append(newLanguage)
 				self.saveItems()
 			}
 		}
-		alert.addTextField { (languageNameField) in
-			languageNameField.placeholder = "Name of the language"
-			nameField = languageNameField
+		alert.addTextField { (languageNameField1) in
+			languageNameField1.placeholder = "Name of the language"
+			nameField1 = languageNameField1
 		}
-		alert.addTextField { (flagEmojiField) in
-			flagEmojiField.placeholder = "Add a flag emoji here"
-			emojiField = flagEmojiField
+		alert.addTextField { (flagEmojiField1) in
+			flagEmojiField1.placeholder = "Add a flag emoji here"
+			emojiField1 = flagEmojiField1
+		}
+		alert.addTextField { (languageNameField2) in
+			languageNameField2.placeholder = "Name of the language"
+			nameField2 = languageNameField2
+		}
+		alert.addTextField { (flagEmojiField2) in
+			flagEmojiField2.placeholder = "Add a flag emoji here"
+			emojiField2 = flagEmojiField2
 		}
 		alert.addAction(action)
 		present(alert, animated: true, completion: nil)
