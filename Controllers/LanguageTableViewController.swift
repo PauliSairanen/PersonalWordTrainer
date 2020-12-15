@@ -10,7 +10,7 @@ import CoreData
 
 class LanguageTableViewController: UITableViewController {
 
-	var languageArray = [LanguageItem]()
+	var languageArray = [LanguageItem]()	
 	let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 	let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 	
@@ -42,25 +42,10 @@ class LanguageTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LanguageTableViewCell", for: indexPath) as! LanguageTableViewCell
 		cell.languageName1.text = languageArray[indexPath.item].name1
 		cell.languageEmoji1.text = languageArray[indexPath.item].flag1
-		
 		cell.languageName2.text = languageArray[indexPath.item].name2
 		cell.languageEmoji2.text = languageArray[indexPath.item].flag2
-		
-		print(languageArray[indexPath.item])
-        // Configure the cell...
-
         return cell
     }
-
-
-
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-
-
 
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -74,15 +59,23 @@ class LanguageTableViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
+	
+	// MARK: - Navigation and Segues
  
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		performSegue(withIdentifier: "goToSelectWordpair", sender: self)
+	}
  
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+		let destinationVC = segue.destination as! WordTableViewController
+		// Pasing on value to the next ViewController
+		if let indexPath = tableView.indexPathForSelectedRow {
+			destinationVC.selectedLanguages = languageArray[indexPath.item]
+		}
     }
+	
+	
+	//MARK: - Buttons
 	
 	@IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
 		var nameField1 = UITextField()
