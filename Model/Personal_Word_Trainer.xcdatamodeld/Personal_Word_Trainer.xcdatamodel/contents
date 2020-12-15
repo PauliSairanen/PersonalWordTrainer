@@ -5,8 +5,15 @@
         <attribute name="flag2" optional="YES" attributeType="String"/>
         <attribute name="name1" attributeType="String"/>
         <attribute name="name2" attributeType="String"/>
+        <relationship name="wordPairs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WordPairs" inverseName="parentLanguages" inverseEntity="WordPairs"/>
+    </entity>
+    <entity name="WordPairs" representedClassName="WordPairs" syncable="YES" codeGenerationType="class">
+        <attribute name="word1" optional="YES" attributeType="String"/>
+        <attribute name="word2" optional="YES" attributeType="String"/>
+        <relationship name="parentLanguages" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LanguageItem" inverseName="wordPairs" inverseEntity="LanguageItem"/>
     </entity>
     <elements>
-        <element name="LanguageItem" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="LanguageItem" positionX="-236.747314453125" positionY="-101.9420166015625" width="128" height="118"/>
+        <element name="WordPairs" positionX="-9.236083984375" positionY="13.98724365234375" width="128" height="88"/>
     </elements>
 </model>
