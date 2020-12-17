@@ -173,7 +173,7 @@
         <!--Text Edit View Controller-->
         <scene sceneID="zbs-jh-hKU">
             <objects>
-                <viewController id="P6n-Wa-DiR" customClass="TextEditViewController" customModule="Personal_Word_Trainer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TextEditViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="P6n-Wa-DiR" customClass="TextEditViewController" customModule="Personal_Word_Trainer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xcD-8T-ak1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

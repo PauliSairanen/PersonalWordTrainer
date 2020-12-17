@@ -7,7 +7,7 @@
         <attribute name="name2" attributeType="String"/>
         <relationship name="wordPairs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WordPairs" inverseName="parentLanguages" inverseEntity="WordPairs"/>
     </entity>
-    <entity name="WordPairs" representedClassName="WordPairs" syncable="YES" codeGenerationType="class">
+    <entity name="WordPairs" representedClassName=".WordPairs" syncable="YES" codeGenerationType="class">
         <attribute name="word1" optional="YES" attributeType="String"/>
         <attribute name="word2" optional="YES" attributeType="String"/>
         <relationship name="parentLanguages" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LanguageItem" inverseName="wordPairs" inverseEntity="LanguageItem"/>
