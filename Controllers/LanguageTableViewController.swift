@@ -70,7 +70,7 @@ class LanguageTableViewController: UITableViewController {
 		let destinationVC = segue.destination as! WordTableViewController
 		// Pasing on value to the next ViewController
 		if let indexPath = tableView.indexPathForSelectedRow {
-			destinationVC.selectedLanguages = languageArray[indexPath.item]
+			destinationVC.selectedLanguagesItem = languageArray[indexPath.item]
 		}
     }
 	

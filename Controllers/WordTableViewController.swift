@@ -13,7 +13,7 @@ class WordTableViewController: UITableViewController {
 	let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 	let dataFirePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 	var wordPairArray = [WordPairs]()
-	var selectedLanguages: LanguageItem? {
+	var selectedLanguagesItem: LanguageItem? {
 		didSet{
 			loadItems()
 		}
@@ -89,7 +89,19 @@ class WordTableViewController: UITableViewController {
 		}
 		self.tableView.reloadData()
 	}
-	func loadItems(with request: NSFetchRequest<WordPairs> = WordPairs.fetchRequest()) {
+	func loadItems(with request: NSFetchRequest<WordPairs> = WordPairs.fetchRequest(), predicate: NSPredicate? = nil) {
+		
+		// Predicate for DB query is created, which will sort the results
+		let languageItemPredicate = NSPredicate(format: "parentLanguageItem.name1 MATCHES %@ AND parentLanguageItem.name2 MATCHES %@", selectedLanguagesItem!.name1!, selectedLanguagesItem!.name2! )
+		
+		// Check if predicate from parameter exists and use both predicates
+		if let additionalPredicate = predicate {
+			request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [languageItemPredicate, additionalPredicate])
+		// Else use only the predicate defined earlier
+		} else {
+			request.predicate = languageItemPredicate
+		}
+		// Use request to fetch data using Core Data
 		do {
 			wordPairArray = try context.fetch(request)
 		} catch  {
@@ -108,7 +120,7 @@ extension WordTableViewController: EditDataInModalDelegate {
 		var newWordPair = WordPairs(context: self.context)
 		newWordPair.word1 = editedText1
 		newWordPair.word2 = editedText2
-		newWordPair.parentLanguages = self.selectedLanguages
+		newWordPair.parentLanguageItem = self.selectedLanguagesItem
 		wordPairArray.append(newWordPair)
 		saveItems()
 		self.navigationController?.popViewController(animated: true)

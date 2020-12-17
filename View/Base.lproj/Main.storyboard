@@ -34,7 +34,7 @@
                                                     <constraint firstAttribute="height" constant="60" id="Udd-Ze-yZb"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="eB3-dO-OpR"/>
                                                 </constraints>
-                                                <state key="normal" title="Add Language">
+                                                <state key="normal" title="Edit Languages">
                                                     <color key="titleColor" systemColor="systemIndigoColor"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
