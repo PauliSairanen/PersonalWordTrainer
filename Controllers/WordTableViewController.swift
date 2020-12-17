@@ -18,6 +18,7 @@ class WordTableViewController: UITableViewController {
 			loadItems()
 		}
 	}
+	var lastSelectedIndexPath: IndexPath?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -63,22 +64,41 @@ class WordTableViewController: UITableViewController {
 		// Perform segue to EditViewController to add text
 		if let vc = storyboard?.instantiateViewController(identifier: "TextEditViewController") as? TextEditViewController {
 			vc.delegate = self
+			vc.selectedLangagesItem = selectedLanguagesItem
+			vc.newEntry = true
 			self.navigationController?.pushViewController(vc, animated: true)
 		}
-		
-//		performSegue(withIdentifier: "goToEditScreen", sender: self)
+		//		performSegue(withIdentifier: "goToEditScreen", sender: self)
 		// When new items are created, you also need to set the parent category for the new item
 	}
 	// Edit existing entries
+	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		performSegue(withIdentifier: "goToEditScreen", sender: self)
-	}
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		let destinationVC = segue.destination as! TextEditViewController
-		if let indexpath = tableView.indexPathForSelectedRow {
-			destinationVC.selectedWordPair = wordPairArray[indexpath.item]
+		lastSelectedIndexPath = indexPath
+		if let vc = storyboard?.instantiateViewController(identifier: "TextEditViewController") as? TextEditViewController {
+			vc.delegate = self
+			vc.selectedLangagesItem = selectedLanguagesItem
+			vc.selectedWordPair = wordPairArray[indexPath.item]
+			vc.newEntry = false
+			self.navigationController?.pushViewController(vc, animated: true)
 		}
 	}
+	
+	
+//	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//
+//
+//
+//		performSegue(withIdentifier: "goToEditScreen", sender: self)
+//	}
+//	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//		let destinationVC = segue.destination as! TextEditViewController
+//		if let indexpath = tableView.indexPathForSelectedRow {
+//			destinationVC.selectedLangagesItem = selectedLanguagesItem
+//			destinationVC.selectedWordPair = wordPairArray[indexpath.item]
+//		}
+//	}
 	
 	//MARK: - Data manipulation methods (Save, Read)
 	func saveItems() {
@@ -97,7 +117,7 @@ class WordTableViewController: UITableViewController {
 		// Check if predicate from parameter exists and use both predicates
 		if let additionalPredicate = predicate {
 			request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [languageItemPredicate, additionalPredicate])
-		// Else use only the predicate defined earlier
+			// Else use only the predicate defined earlier
 		} else {
 			request.predicate = languageItemPredicate
 		}
@@ -115,16 +135,25 @@ class WordTableViewController: UITableViewController {
 
 // ToDo Set parent as delegate to the child to recevie data
 extension WordTableViewController: EditDataInModalDelegate {
-	func childViewWillDismiss(editedText1: String, editedText2: String) {
+	func childViewWillDismiss(editedText1: String, editedText2: String, isNewEntry: Bool) {
 		print("Data received on WordTableViewScreen: Word 1 = \(editedText1), word2 = \(editedText2)")
-		var newWordPair = WordPairs(context: self.context)
-		newWordPair.word1 = editedText1
-		newWordPair.word2 = editedText2
-		newWordPair.parentLanguageItem = self.selectedLanguagesItem
-		wordPairArray.append(newWordPair)
-		saveItems()
-		self.navigationController?.popViewController(animated: true)
-		tableView.reloadData()
+		if isNewEntry {
+			let newWordPair = WordPairs(context: self.context)
+			newWordPair.word1 = editedText1
+			newWordPair.word2 = editedText2
+			newWordPair.parentLanguageItem = self.selectedLanguagesItem
+			wordPairArray.append(newWordPair)
+			saveItems()
+			self.navigationController?.popViewController(animated: true)
+			tableView.reloadData()
+		} else {
+			var editedWordPair = wordPairArray[lastSelectedIndexPath!.item]
+			editedWordPair.word1 = editedText1
+			editedWordPair.word2 = editedText2
+			saveItems()
+			self.navigationController?.popViewController(animated: true)
+			tableView.reloadData()
+		}
 	}
 }
 

@@ -8,29 +8,29 @@
 import UIKit
 
 protocol EditDataInModalDelegate {
-	func childViewWillDismiss(editedText1: String, editedText2: String)
+	func childViewWillDismiss(editedText1: String, editedText2: String, isNewEntry: Bool)
 }
 
 class TextEditViewController: UIViewController {
-
 	@IBOutlet weak var languageLabel1: UILabel!
 	@IBOutlet weak var textEditField1: UITextField!
 	@IBOutlet weak var languageLabel2: UILabel!
 	@IBOutlet weak var textEditField2: UITextField!
 	
 	var delegate:EditDataInModalDelegate?
-		
-	var selectedWordPair: WordPairs? {
-		didSet{
-			print("Received Word Pair from WordTableViewController")
-		}
-	}
-	
 	let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 	let dataFirePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 	
+	var selectedWordPair: WordPairs?
+	var selectedLangagesItem: LanguageItem?
+	var newEntry: Bool?
+	
     override func viewDidLoad() {
         super.viewDidLoad()
+		languageLabel1.text = selectedLangagesItem?.name1
+		languageLabel2.text = selectedLangagesItem?.name2
+		textEditField1.text = selectedWordPair?.word1
+		textEditField2.text = selectedWordPair?.word2
     }
 	
 	@IBAction func AcceptTextEditPressed(_ sender: UIButton) {
@@ -39,7 +39,7 @@ class TextEditViewController: UIViewController {
 			return
 		}
 			print(Text1, Text2)
-			delegate?.childViewWillDismiss( editedText1: Text1,  editedText2: Text2)
+			delegate?.childViewWillDismiss( editedText1: Text1,  editedText2: Text2, isNewEntry: newEntry!)
 	}
 	
 	@IBAction func DeclineTextEditPressed(_ sender: UIButton) {
