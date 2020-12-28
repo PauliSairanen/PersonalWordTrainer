@@ -13,9 +13,10 @@ protocol EditDataInModalDelegate {
 
 class TextEditViewController: UIViewController {
 	@IBOutlet weak var languageLabel1: UILabel!
-	@IBOutlet weak var textEditField1: UITextField!
 	@IBOutlet weak var languageLabel2: UILabel!
-	@IBOutlet weak var textEditField2: UITextField!
+	@IBOutlet weak var textEditField1: UITextView!
+	@IBOutlet weak var textEditField2: UITextView!
+	
 	
 	var delegate:EditDataInModalDelegate?
 	let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -27,24 +28,37 @@ class TextEditViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		self.textEditField1.layer.borderColor = UIColor.lightGray.cgColor
+		self.textEditField1.layer.borderWidth = 0.5
+		self.textEditField2.layer.borderColor = UIColor.lightGray.cgColor
+		self.textEditField2.layer.borderWidth = 0.5
+		
 		languageLabel1.text = selectedLangagesItem?.name1
 		languageLabel2.text = selectedLangagesItem?.name2
 		textEditField1.text = selectedWordPair?.word1
 		textEditField2.text = selectedWordPair?.word2
     }
 	
-	@IBAction func AcceptTextEditPressed(_ sender: UIButton) {
+	
+	@IBAction func acceptButtonPressed(_ sender: UIButton) {
 		guard let Text1 = textEditField1.text, let Text2 = textEditField2.text else {
 			print("Nil found in textfields")
 			return
 		}
-			print(Text1, Text2)
-			delegate?.childViewWillDismiss( editedText1: Text1,  editedText2: Text2, isNewEntry: newEntry!)
+		print(Text1, Text2)
+		delegate?.childViewWillDismiss( editedText1: Text1,  editedText2: Text2, isNewEntry: newEntry!)
 	}
 	
-	@IBAction func DeclineTextEditPressed(_ sender: UIButton) {
-		self.dismiss(animated: true, completion: nil)
+	@IBAction func declineButtonPressed(_ sender: UIButton) {
+		navigationController?.popViewController(animated: true)
 	}
+	
 	
 	//MARK: - Data manipulation methods (Save, Read)
+}
+
+extension TextEditViewController {
+	open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		self.view.endEditing(true)
+	}
 }
