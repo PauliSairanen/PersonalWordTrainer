@@ -21,7 +21,12 @@ class LanguageTableViewController: UITableViewController {
 		loadItems()
     }
 
-    // MARK: - Table view data source
+	
+	
+	
+	
+	
+	// MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -36,7 +41,6 @@ class LanguageTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 70
 	}
-
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LanguageTableViewCell", for: indexPath) as! LanguageTableViewCell
@@ -60,6 +64,11 @@ class LanguageTableViewController: UITableViewController {
         }    
     }
 	
+	
+	
+	
+	
+	
 	// MARK: - Navigation and Segues
  
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -73,6 +82,10 @@ class LanguageTableViewController: UITableViewController {
 			destinationVC.selectedLanguagesItem = languageArray[indexPath.item]
 		}
     }
+	
+	
+	
+	
 	
 	
 	//MARK: - Buttons
@@ -114,6 +127,11 @@ class LanguageTableViewController: UITableViewController {
 		alert.addAction(action)
 		present(alert, animated: true, completion: nil)
 	}
+	
+	
+	
+	
+	
 	
 	//MARK: - Data manipulation methods (Save, Read)
 	func saveItems() {
