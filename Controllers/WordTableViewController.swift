@@ -11,7 +11,7 @@ import CoreData
 class WordTableViewController: UITableViewController {
 	var textEditView = TextEditViewController()
 	let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-	let dataFirePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+	let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 	var wordPairArray = [WordPairs]()
 	var selectedLanguagesItem: LanguageItem? {
 		didSet{
