@@ -67,6 +67,9 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="cJk-3v-JNi" kind="show" id="YM8-dR-YAD"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
@@ -93,7 +96,55 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="138.61607142857142"/>
         </scene>
-        <!--Language Table View Controller-->
+        <!--Select Practice-->
+        <scene sceneID="cQW-L0-nTK">
+            <objects>
+                <tableViewController id="cJk-3v-JNi" customClass="SelectGameTableViewController" customModule="Personal_Word_Trainer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="L5b-ME-RUa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="100" id="01M-Vd-X8o">
+                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="01M-Vd-X8o" id="QEk-JR-Vi5">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="GQx-b0-0p2" kind="show" identifier="GoToGameView" id="zOD-2l-mqY"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="cJk-3v-JNi" id="I5f-kv-Ypx"/>
+                            <outlet property="delegate" destination="cJk-3v-JNi" id="Yog-1a-rSF"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Select Practice" id="gvj-qq-7wa"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Ik-fL-TmB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1840.8" y="581.5270935960591"/>
+        </scene>
+        <!--Game View Controller-->
+        <scene sceneID="aaQ-1g-IQL">
+            <objects>
+                <viewController storyboardIdentifier="GameViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GQx-b0-0p2" customClass="GameViewController" customModule="Personal_Word_Trainer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ipm-O8-4Td">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="COW-nF-SYz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="M1O-PT-PGI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ELy-U4-ZxR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2574" y="582"/>
+        </scene>
+        <!--Add or Edit languages-->
         <scene sceneID="hv4-Ag-Sgs">
             <objects>
                 <tableViewController id="Yhe-jO-mfZ" customClass="LanguageTableViewController" customModule="Personal_Word_Trainer" customModuleProvider="target" sceneMemberID="viewController">
@@ -120,7 +171,7 @@
                             <outlet property="delegate" destination="Yhe-jO-mfZ" id="Z4N-xy-Cfs"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="wJg-3j-1hT">
+                    <navigationItem key="navigationItem" title="Add or Edit languages" id="wJg-3j-1hT">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="wQn-fk-6Oo">
                             <connections>
                                 <action selector="addButtonPressed:" destination="Yhe-jO-mfZ" id="03w-o3-okx"/>
@@ -130,9 +181,9 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdv-bA-EhI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1842" y="-117"/>
+            <point key="canvasLocation" x="1840.8" y="-117.48768472906404"/>
         </scene>
-        <!--Word Table View Controller-->
+        <!--Add or Edit words-->
         <scene sceneID="F4O-IQ-J8b">
             <objects>
                 <tableViewController id="uCS-ZT-x4l" customClass="WordTableViewController" customModule="Personal_Word_Trainer" customModuleProvider="target" sceneMemberID="viewController">
@@ -158,7 +209,7 @@
                             <outlet property="delegate" destination="uCS-ZT-x4l" id="6NW-Zh-toH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="tR6-uc-gVq">
+                    <navigationItem key="navigationItem" title="Add or Edit words" id="tR6-uc-gVq">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="JgR-8n-qWz">
                             <connections>
                                 <action selector="addButtonPressed:" destination="uCS-ZT-x4l" id="rJg-IA-Bob"/>
