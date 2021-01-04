@@ -78,7 +78,7 @@ class GameViewController: UIViewController {
 				alert.addAction((UIAlertAction(title: "Yes!", style: .default, handler: { (UIAlertAction) in
 					self.resetGame()
 				})))
-				DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+				DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 					self.present(alert, animated: true, completion: nil)
 				}}}
 		else {
