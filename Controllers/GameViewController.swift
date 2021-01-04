@@ -21,24 +21,53 @@ class GameViewController: UIViewController {
 	var wordPairArray = [WordPairs]()
 	var selectedLanguagesItem: LanguageItem?
 	var correctAnswers = 0
-			
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		loadItems()
 		language1Label.text = selectedLanguagesItem?.name1
 		language2Label.text = selectedLanguagesItem?.name2
 		questionTextField.text = wordPairArray[0].word1
 		answerTextField.text = ""
-    }
-    
+	}
+	
+	//MARK: - Game functions
+	
+	func compareWords(index: Int) -> Bool {
+		let wordFromStorage = wordPairArray[index].word2
+		let userTypedWord = answerTextField.text
+		if (wordFromStorage == userTypedWord) {
+			return true
+		} else {
+			return false
+		}
+	}
 	
 	
 	
 	
-
+	
+	
+	
+	
+	
+	
 	//MARK: - Buttons
 	
 	@IBAction func checkAnswer(_ sender: UIButton) {
+		let answeredCorretly = compareWords(index: 0)
+		if answeredCorretly == true {
+			print("Answer is corret!")
+			feedbackImage.image = UIImage(systemName: "hand.thumbsup.fill")
+			feedbackImage.tintColor = #colorLiteral(red: 0.1203318441, green: 0.503712378, blue: 0.09756665541, alpha: 1)
+			
+		} else {
+			feedbackImage.image = UIImage(systemName: "hand.thumbsdown.fill")
+			feedbackImage.tintColor = .red
+			print("Answer INCORRECT!")
+			
+			
+		}
 	}
 	
 	
