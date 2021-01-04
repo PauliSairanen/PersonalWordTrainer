@@ -9,6 +9,8 @@ import UIKit
 import CoreData
 
 class GameViewController: UIViewController {
+	
+	@IBOutlet weak var scoreLabel: UILabel!
 	@IBOutlet weak var progressBar: UIProgressView!
 	@IBOutlet weak var language1Label: UILabel!
 	@IBOutlet weak var questionTextField: UITextView!
@@ -47,6 +49,7 @@ class GameViewController: UIViewController {
 		totalQuestions = wordPairArray.count
 		progressBar.setProgress(Float(0.0), animated: true)
 		feedbackImage.isHidden = true
+		scoreLabel.text = "0 / \(wordPairArray.count)"
 	}
 	
 	func updateProgressBar() {
@@ -55,6 +58,7 @@ class GameViewController: UIViewController {
 		}
 		else {
 			if let amountOfQuestion = totalQuestions {
+				scoreLabel.text = "\(correctAnswers) / \(amountOfQuestion)"
 				print("Correct Answers inside updateProgressbar: \(correctAnswers)")
 				print("Total questions inside progress bar: \(amountOfQuestion)")
 				let currentProgress = (Float(correctAnswers) / Float(amountOfQuestion))
