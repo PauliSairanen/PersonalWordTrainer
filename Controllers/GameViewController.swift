@@ -60,32 +60,27 @@ class GameViewController: UIViewController {
 				})))
 				DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 					self.present(alert, animated: true, completion: nil)
-				}
-			}
-		}
+				}}}
 		else {
 			// Animate the next words after a brief delay
 			DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 				self.questionTextField.text = self.wordPairArray[self.currentProgress].word1
 				self.answerTextField.text = ""
 				self.feedbackImage.isHidden = true
-			}
-		}
-	}
+			}}}
 	
 	func updateProgressBar() {
 		if correctAnswers == 0 {
 			progressBar.setProgress(Float(0.0), animated: true)
-		} else {
+		}
+		else {
 			if let amountOfQuestion = totalQuestions {
 				print("Correct Answers inside updateProgressbar: \(correctAnswers)")
 				print("Total questions inside progress bar: \(amountOfQuestion)")
 				let currentProgress = (Float(correctAnswers) / Float(amountOfQuestion))
 				print(currentProgress)
 				progressBar.setProgress(Float(currentProgress), animated: true)
-			}
-		}
-	}
+			}}}
 	
 	func compareWords(index: Int) -> Bool {
 		let wordFromStorage = wordPairArray[index].word2
@@ -94,11 +89,11 @@ class GameViewController: UIViewController {
 			currentProgress += 1
 			correctAnswers += 1
 			return true
-		} else {
+		}
+		else {
 			currentProgress += 1
 			return false
-		}
-	}
+		}}
 	
 	
 	//MARK: - Buttons
@@ -118,8 +113,7 @@ class GameViewController: UIViewController {
 			feedbackImage.image = UIImage(systemName: "hand.thumbsdown.fill")
 			feedbackImage.tintColor = .red
 			print("Answer INCORRECT!")
-		}
-	}
+		}}
 	
 	
 	
@@ -132,11 +126,9 @@ class GameViewController: UIViewController {
 			try context.save()
 		} catch  {
 			print("Error saving context \(error)")
-		}
-		
-	}
+		}}
+	
 	func loadItems(with request: NSFetchRequest<WordPairs> = WordPairs.fetchRequest(), predicate: NSPredicate? = nil) {
-		
 		// Predicate for DB query is created, which will sort the results
 		let languageItemPredicate = NSPredicate(format: "parentLanguageItem.name1 MATCHES %@ AND parentLanguageItem.name2 MATCHES %@", selectedLanguagesItem!.name1!, selectedLanguagesItem!.name2! )
 		
@@ -152,7 +144,6 @@ class GameViewController: UIViewController {
 			wordPairArray = try context.fetch(request)
 		} catch  {
 			print("Error fetching data from context \(error)")
-		}
-	}
+		}}
 	
 }
