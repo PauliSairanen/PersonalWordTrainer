@@ -46,6 +46,7 @@ class GameViewController: UIViewController {
 		answerTextField.text = ""
 		totalQuestions = wordPairArray.count
 		progressBar.setProgress(Float(0.0), animated: true)
+		feedbackImage.isHidden = true
 	}
 	
 	func updateProgressBar() {
@@ -121,8 +122,6 @@ class GameViewController: UIViewController {
 			print("Answer INCORRECT!")
 		}}
 	
-	
-	
 	@IBAction func swapLanguages(_ sender: UIButton) {
 		let alert = UIAlertController(title: "Swapping languages will reset practice", message: "Swap languages?", preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(UIAlertAction) in
@@ -134,6 +133,7 @@ class GameViewController: UIViewController {
 		alert.addAction((UIAlertAction(title: "No", style: .default, handler: nil)))
 		self.present(alert, animated: true, completion: nil)
 	}
+	
 	
 	
 	
