@@ -20,29 +20,88 @@ class GameViewController: UIViewController {
 	let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 	var wordPairArray = [WordPairs]()
 	var selectedLanguagesItem: LanguageItem?
+	var totalQuestion: Int?
 	var correctAnswers = 0
+	var currentProgress = 0
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		loadItems()
+//		language1Label.text = selectedLanguagesItem?.name1
+//		language2Label.text = selectedLanguagesItem?.name2
+//		questionTextField.text = wordPairArray[0].word1
+//		answerTextField.text = ""
+//		totalQuestion = wordPairArray.count
+//		progressBar.setProgress(Float(0.0), animated: true)
+		resetGame()
+	}
+	
+	//MARK: - Game functions
+	func resetGame() {
+		correctAnswers = 0
+		currentProgress = 0
 		language1Label.text = selectedLanguagesItem?.name1
 		language2Label.text = selectedLanguagesItem?.name2
 		questionTextField.text = wordPairArray[0].word1
 		answerTextField.text = ""
+		totalQuestion = wordPairArray.count
+		progressBar.setProgress(Float(0.0), animated: true)
 	}
 	
-	//MARK: - Game functions
+	
+	func updateUI(){
+		print("Correct Answers: \(correctAnswers)")
+		print("Current Progress: \(currentProgress)")
+		
+		updateProgressBar()
+		
+		// IF all questions are done, show that game is over
+		if (currentProgress == totalQuestion) {
+			let alert = UIAlertController(title: "Game has ended", message: "Total score: \(correctAnswers) / \(totalQuestion)", preferredStyle: .alert)
+			alert.addAction(UIAlertAction(title: "No", style: .default, handler: {(UIAlertAction) in
+				self.navigationController?.popViewController(animated: true)
+			}))
+			alert.addAction((UIAlertAction(title: "Yes!", style: .default, handler: { (UIAlertAction) in
+				self.resetGame()
+			})))
+			self.present(alert, animated: true, completion: nil)
+		} else {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+				self.questionTextField.text = self.wordPairArray[self.currentProgress].word1
+				self.answerTextField.text = ""
+				self.feedbackImage.isHidden = true
+			}
+		}
+		
+		// Show total score somehow
+		
+
+	
+	}
+	
+	func updateProgressBar() {
+		if correctAnswers == 0 {
+			progressBar.setProgress(Float(0.0), animated: true)
+		} else {
+			progressBar.setProgress(Float(correctAnswers/totalQuestion!), animated: true)
+		}
+	}
+	
 	
 	func compareWords(index: Int) -> Bool {
 		let wordFromStorage = wordPairArray[index].word2
 		let userTypedWord = answerTextField.text
 		if (wordFromStorage == userTypedWord) {
+			currentProgress += 1
+			correctAnswers += 1
 			return true
 		} else {
+			currentProgress += 1
 			return false
 		}
 	}
 	
+
 	
 	
 	
@@ -55,13 +114,17 @@ class GameViewController: UIViewController {
 	//MARK: - Buttons
 	
 	@IBAction func checkAnswer(_ sender: UIButton) {
-		let answeredCorretly = compareWords(index: 0)
+		let answeredCorretly = compareWords(index: currentProgress)
 		if answeredCorretly == true {
+			updateUI()
 			print("Answer is corret!")
+			feedbackImage.isHidden = false
 			feedbackImage.image = UIImage(systemName: "hand.thumbsup.fill")
 			feedbackImage.tintColor = #colorLiteral(red: 0.1203318441, green: 0.503712378, blue: 0.09756665541, alpha: 1)
 			
 		} else {
+			updateUI()
+			feedbackImage.isHidden = false
 			feedbackImage.image = UIImage(systemName: "hand.thumbsdown.fill")
 			feedbackImage.tintColor = .red
 			print("Answer INCORRECT!")
