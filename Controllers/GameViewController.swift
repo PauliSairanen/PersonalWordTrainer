@@ -23,12 +23,18 @@ class GameViewController: UIViewController {
 	var totalQuestions: Int?
 	var correctAnswers = 0
 	var currentProgress = 0
+	var isSwapped = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		loadItems()
 		resetGame()
 	}
+	
+	
+	
+	
+	
 	
 	//MARK: - Game functions
 	func resetGame() {
@@ -42,16 +48,25 @@ class GameViewController: UIViewController {
 		progressBar.setProgress(Float(0.0), animated: true)
 	}
 	
+	func updateProgressBar() {
+		if correctAnswers == 0 {
+			progressBar.setProgress(Float(0.0), animated: true)
+		}
+		else {
+			if let amountOfQuestion = totalQuestions {
+				print("Correct Answers inside updateProgressbar: \(correctAnswers)")
+				print("Total questions inside progress bar: \(amountOfQuestion)")
+				let currentProgress = (Float(correctAnswers) / Float(amountOfQuestion))
+				print(currentProgress)
+				progressBar.setProgress(Float(currentProgress), animated: true)
+			}}}
+	
 	func updateUI(){
-		print("Correct Answers: \(correctAnswers)")
-		print("Current Progress: \(currentProgress)")
-		
 		updateProgressBar()
-		
 		// IF all questions are done, show that game is over
 		if (currentProgress == totalQuestions) {
 			if let amountOfQuestions = totalQuestions {
-				let alert = UIAlertController(title: "Total score: \(correctAnswers) / \(amountOfQuestions)", message: "Play again?", preferredStyle: .alert)
+				let alert = UIAlertController(title: "Total score: \(correctAnswers) / \(amountOfQuestions)", message: "Practice again?", preferredStyle: .alert)
 				alert.addAction(UIAlertAction(title: "No", style: .default, handler: {(UIAlertAction) in
 					self.navigationController?.popViewController(animated: true)
 				}))
@@ -69,19 +84,6 @@ class GameViewController: UIViewController {
 				self.feedbackImage.isHidden = true
 			}}}
 	
-	func updateProgressBar() {
-		if correctAnswers == 0 {
-			progressBar.setProgress(Float(0.0), animated: true)
-		}
-		else {
-			if let amountOfQuestion = totalQuestions {
-				print("Correct Answers inside updateProgressbar: \(correctAnswers)")
-				print("Total questions inside progress bar: \(amountOfQuestion)")
-				let currentProgress = (Float(correctAnswers) / Float(amountOfQuestion))
-				print(currentProgress)
-				progressBar.setProgress(Float(currentProgress), animated: true)
-			}}}
-	
 	func compareWords(index: Int) -> Bool {
 		let wordFromStorage = wordPairArray[index].word2
 		let userTypedWord = answerTextField.text
@@ -96,11 +98,15 @@ class GameViewController: UIViewController {
 		}}
 	
 	
+	
+	
+	
+	
 	//MARK: - Buttons
 	
 	@IBAction func checkAnswer(_ sender: UIButton) {
-		let answeredCorretly = compareWords(index: currentProgress)
-		if answeredCorretly == true {
+		let answeredCorrectly = compareWords(index: currentProgress)
+		if answeredCorrectly == true {
 			updateUI()
 			print("Answer is correct!")
 			feedbackImage.isHidden = false
@@ -115,6 +121,19 @@ class GameViewController: UIViewController {
 			print("Answer INCORRECT!")
 		}}
 	
+	
+	
+	@IBAction func swapLanguages(_ sender: UIButton) {
+		let alert = UIAlertController(title: "Swapping languages will reset practice", message: "Swap languages?", preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(UIAlertAction) in
+			for index in 0...self.totalQuestions!-1 {
+				swap(&self.wordPairArray[index].word1, &self.wordPairArray[index].word2)
+			}
+			self.resetGame()
+		}))
+		alert.addAction((UIAlertAction(title: "No", style: .default, handler: nil)))
+		self.present(alert, animated: true, completion: nil)
+	}
 	
 	
 	
