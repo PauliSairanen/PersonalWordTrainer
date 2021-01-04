@@ -97,7 +97,6 @@ class LanguageTableViewController: UITableViewController {
 		var emojiField2 = UITextField()
 		let alert = UIAlertController(title: "Add new Language", message: "", preferredStyle: .alert)
 		let action = UIAlertAction(title: "Add Language", style: .default) { (action) in
-			if let textToAdd = nameField1.text {
 				let newLanguage = LanguageItem(context: self.context)
 				newLanguage.name1 = nameField1.text
 				newLanguage.flag1 = emojiField1.text
@@ -106,7 +105,6 @@ class LanguageTableViewController: UITableViewController {
 				newLanguage.flag2 = emojiField2.text
 				self.languageArray.append(newLanguage)
 				self.saveItems()
-			}
 		}
 		alert.addTextField { (languageNameField1) in
 			languageNameField1.placeholder = "Name of the language"
