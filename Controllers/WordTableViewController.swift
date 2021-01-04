@@ -147,7 +147,7 @@ extension WordTableViewController: EditDataInModalDelegate {
 			self.navigationController?.popViewController(animated: true)
 			tableView.reloadData()
 		} else {
-			var editedWordPair = wordPairArray[lastSelectedIndexPath!.item]
+			let editedWordPair = wordPairArray[lastSelectedIndexPath!.item]
 			editedWordPair.word1 = editedText1
 			editedWordPair.word2 = editedText2
 			saveItems()
