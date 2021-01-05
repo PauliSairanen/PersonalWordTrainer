@@ -32,14 +32,13 @@ class GameViewController: UIViewController, UITextViewDelegate {
 		loadItems()
 		resetGame()
 		self.answerTextField.delegate = self
+		questionTextField.isEditable = false
 	}
 	
 	func textViewDidEndEditing(_ textView: UITextView) {
 		checkAnswer()
 	}
 	
-
-
 	
 	
 	
