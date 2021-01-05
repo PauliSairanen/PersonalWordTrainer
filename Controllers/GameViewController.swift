@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, UITextViewDelegate {
 	
 	@IBOutlet weak var scoreLabel: UILabel!
 	@IBOutlet weak var progressBar: UIProgressView!
@@ -31,8 +31,14 @@ class GameViewController: UIViewController {
 		super.viewDidLoad()
 		loadItems()
 		resetGame()
+		self.answerTextField.delegate = self
 	}
 	
+	func textViewDidEndEditing(_ textView: UITextView) {
+		checkAnswer()
+	}
+	
+
 
 	
 	
@@ -103,14 +109,7 @@ class GameViewController: UIViewController {
 			return false
 		}}
 	
-	
-	
-	
-	
-	
-	//MARK: - Buttons
-	
-	@IBAction func checkAnswer(_ sender: UIButton) {
+	func checkAnswer() {
 		let answeredCorrectly = compareWords(index: currentProgress)
 		if answeredCorrectly == true {
 			updateUI()
@@ -126,6 +125,19 @@ class GameViewController: UIViewController {
 			feedbackImage.tintColor = .red
 			print("Answer INCORRECT!")
 		}}
+	
+	
+	
+	
+	
+	
+	
+	//MARK: - Buttons
+	
+	@IBAction func checkAnswer(_ sender: UIButton) {
+		checkAnswer()
+		
+	}
 	
 	@IBAction func swapLanguages(_ sender: UIButton) {
 		let alert = UIAlertController(title: "Swapping languages will reset practice", message: "Swap languages?", preferredStyle: .alert)
