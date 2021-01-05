@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_Personal_Word_Trainer_Personal_Word_TrainerUITests : NSObject
+@end
+@implementation PodsDummy_Pods_Personal_Word_Trainer_Personal_Word_TrainerUITests
+@end

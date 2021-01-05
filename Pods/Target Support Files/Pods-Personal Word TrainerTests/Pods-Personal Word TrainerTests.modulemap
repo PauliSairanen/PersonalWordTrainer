@@ -1,0 +1,6 @@
+framework module Pods_Personal_Word_TrainerTests {
+  umbrella header "Pods-Personal Word TrainerTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
