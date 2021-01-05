@@ -27,12 +27,7 @@ class TextEditViewController: UIViewController {
 	var newEntry: Bool?
 	
     override func viewDidLoad() {
-        super.viewDidLoad()
-		self.textEditField1.layer.borderColor = UIColor.lightGray.cgColor
-		self.textEditField1.layer.borderWidth = 0.5
-		self.textEditField2.layer.borderColor = UIColor.lightGray.cgColor
-		self.textEditField2.layer.borderWidth = 0.5
-		
+        super.viewDidLoad()		
 		languageLabel1.text = selectedLangagesItem?.name1
 		languageLabel2.text = selectedLangagesItem?.name2
 		textEditField1.text = selectedWordPair?.word1
