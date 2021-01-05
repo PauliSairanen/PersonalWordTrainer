@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -131,7 +131,6 @@
 				2173FFF50ED9A033A3C00877 /* Pods-Personal Word TrainerTests.debug.xcconfig */,
 				48A114D38F20F2F898EB357E /* Pods-Personal Word TrainerTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
