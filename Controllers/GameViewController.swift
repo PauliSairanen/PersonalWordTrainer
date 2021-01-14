@@ -26,6 +26,7 @@ class GameViewController: UIViewController, UITextViewDelegate {
 	var correctAnswers = 0
 	var currentProgress = 0
 	var isSwapped = false
+	var alertIsDisplaying = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -71,30 +72,7 @@ class GameViewController: UIViewController, UITextViewDelegate {
 				print(currentProgress)
 				progressBar.setProgress(Float(currentProgress), animated: true)
 			}}}
-	
-	func updateUI(){
-		updateProgressBar()
-		// IF all questions are done, show that game is over
-		if (currentProgress == totalQuestions) {
-			if let amountOfQuestions = totalQuestions {
-				let alert = UIAlertController(title: "Total score: \(correctAnswers) / \(amountOfQuestions)", message: "Practice again?", preferredStyle: .alert)
-				alert.addAction(UIAlertAction(title: "No", style: .default, handler: {(UIAlertAction) in
-					self.navigationController?.popViewController(animated: true)
-				}))
-				alert.addAction((UIAlertAction(title: "Yes!", style: .default, handler: { (UIAlertAction) in
-					self.resetGame()
-				})))
-				DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-					self.present(alert, animated: true, completion: nil)
-				}}}
-		else {
-			// Animate the next words after a brief delay
-			DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-				self.questionTextField.text = self.wordPairArray[self.currentProgress].word1
-				self.answerTextField.text = ""
-				self.feedbackImage.isHidden = true
-			}}}
-	
+
 	func compareWords(index: Int) -> Bool {
 		let wordFromStorage = wordPairArray[index].word2
 		let userTypedWord = answerTextField.text
@@ -111,21 +89,55 @@ class GameViewController: UIViewController, UITextViewDelegate {
 	func checkAnswer() {
 		let answeredCorrectly = compareWords(index: currentProgress)
 		if answeredCorrectly == true {
-			updateUI()
+			updateProgressBar()
 			print("Answer is correct!")
 			feedbackImage.isHidden = false
 			feedbackImage.image = UIImage(systemName: "hand.thumbsup.fill")
 			feedbackImage.tintColor = #colorLiteral(red: 0.1203318441, green: 0.503712378, blue: 0.09756665541, alpha: 1)
+			ifGameHasEnded()
 			
 		} else {
-			updateUI()
+			// Show correct answer in alert
+			guard let answer = wordPairArray[currentProgress-1].word2 else {return}
+			let alert = UIAlertController(title: "Incorrect answer", message: "Correct answer: \(answer) ", preferredStyle: .alert)
+			alert.addAction((UIAlertAction(title: "Ok", style: .default, handler: { (UIAlertAction) in
+				self.dismiss(animated: true, completion: nil)
+				DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+					self.ifGameHasEnded()
+				}
+			})))
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+				self.present(alert, animated: true, completion: nil)
+			}
+			
+			updateProgressBar()
 			feedbackImage.isHidden = false
 			feedbackImage.image = UIImage(systemName: "hand.thumbsdown.fill")
 			feedbackImage.tintColor = .red
 			print("Answer INCORRECT!")
 		}}
 	
-	
+	func ifGameHasEnded() {
+		if (currentProgress == totalQuestions) {
+			if let amountOfQuestions = totalQuestions {
+				let alert = UIAlertController(title: "Total score: \(correctAnswers) / \(amountOfQuestions)", message: "Practice again?", preferredStyle: .alert)
+				alert.addAction(UIAlertAction(title: "No", style: .default, handler: {(UIAlertAction) in
+					self.navigationController?.popViewController(animated: true)
+				}))
+				alert.addAction((UIAlertAction(title: "Yes!", style: .default, handler: { (UIAlertAction) in
+					self.resetGame()
+				})))
+				DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+					self.present(alert, animated: true, completion: nil)
+				}}}
+		else {
+			// Animate the next words after a brief delay
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+				self.questionTextField.text = self.wordPairArray[self.currentProgress].word1
+				self.answerTextField.text = ""
+				self.feedbackImage.isHidden = true
+			}}
+	}
 	
 	
 	
@@ -135,7 +147,6 @@ class GameViewController: UIViewController, UITextViewDelegate {
 	
 	@IBAction func checkAnswer(_ sender: UIButton) {
 		checkAnswer()
-		
 	}
 	
 	@IBAction func swapLanguages(_ sender: UIButton) {
