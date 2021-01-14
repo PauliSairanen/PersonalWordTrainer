@@ -46,8 +46,14 @@ class GameViewController: UIViewController, UITextViewDelegate {
 	func resetGame() {
 		correctAnswers = 0
 		currentProgress = 0
-		language1Label.text = selectedLanguagesItem?.name1
-		language2Label.text = selectedLanguagesItem?.name2
+		if isSwapped {
+			language1Label.text = selectedLanguagesItem?.name2
+			language2Label.text = selectedLanguagesItem?.name1
+		} else {
+			language1Label.text = selectedLanguagesItem?.name1
+			language2Label.text = selectedLanguagesItem?.name2
+		}
+	
 		questionTextField.text = wordPairArray[0].word1
 		answerTextField.text = ""
 		totalQuestions = wordPairArray.count
@@ -153,6 +159,7 @@ class GameViewController: UIViewController, UITextViewDelegate {
 			for index in 0...self.totalQuestions!-1 {
 				swap(&self.wordPairArray[index].word1, &self.wordPairArray[index].word2)
 			}
+			self.isSwapped = !self.isSwapped
 			self.resetGame()
 		}))
 		alert.addAction((UIAlertAction(title: "No", style: .default, handler: nil)))
