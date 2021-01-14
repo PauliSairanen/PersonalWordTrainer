@@ -53,8 +53,9 @@ class GameViewController: UIViewController, UITextViewDelegate {
 			language1Label.text = selectedLanguagesItem?.name1
 			language2Label.text = selectedLanguagesItem?.name2
 		}
-	
-		questionTextField.text = wordPairArray[0].word1
+		
+		guard let textToAnimate = wordPairArray[0].word1 else {return}
+		questionTextField.setTextAnimated(text: textToAnimate)
 		answerTextField.text = ""
 		totalQuestions = wordPairArray.count
 		progressBar.setProgress(Float(0.0), animated: true)
@@ -138,7 +139,8 @@ class GameViewController: UIViewController, UITextViewDelegate {
 		else {
 			// Animate the next words after a brief delay
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-				self.questionTextField.text = self.wordPairArray[self.currentProgress].word1
+				guard let textToAnimate = self.wordPairArray[self.currentProgress].word1 else {return}
+				self.questionTextField.setTextAnimated(text: textToAnimate)
 				self.answerTextField.text = ""
 				self.feedbackImage.isHidden = true
 			}}
@@ -201,8 +203,28 @@ class GameViewController: UIViewController, UITextViewDelegate {
 
 
 //MARK: - Extensions
+
+// Touch anywhere to hide keyboard
 extension GameViewController {
 	open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		self.view.endEditing(true)
+	}
+}
+
+// Animation function for text
+extension UITextView {
+	func setTextAnimated(text: String, characterDelay: TimeInterval = 5.0) {
+		self.text = ""
+		
+		let writingTask = DispatchWorkItem{ [weak self] in
+			text.forEach { (character) in
+				DispatchQueue.main.async {
+					self?.text?.append(character)
+				}
+				Thread.sleep(forTimeInterval: characterDelay/100)
+			}
+		}
+		let queue: DispatchQueue = .init(label: "typespeed", qos: .userInteractive)
+		queue.asyncAfter(deadline: .now() + 0.05, execute: writingTask)
 	}
 }
