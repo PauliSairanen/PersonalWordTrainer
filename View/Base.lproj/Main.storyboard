@@ -406,16 +406,39 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add or Edit words" id="tR6-uc-gVq">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="JgR-8n-qWz">
-                            <connections>
-                                <action selector="addButtonPressed:" destination="uCS-ZT-x4l" id="rJg-IA-Bob"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="JgR-8n-qWz">
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="uCS-ZT-x4l" id="rJg-IA-Bob"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="camera" id="qad-7T-LeL">
+                                <connections>
+                                    <action selector="scanImageForWords:" destination="uCS-ZT-x4l" id="GoQ-wJ-ggt"/>
+                                    <segue destination="3FP-fe-ZbK" kind="presentation" identifier="goToScanImageScreen" id="lGp-tw-IE3"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PXD-e1-SXz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2575" y="-117"/>
+        </scene>
+        <!--Scan Image View Controller-->
+        <scene sceneID="yK0-65-Ztp">
+            <objects>
+                <viewController storyboardIdentifier="scanImageViewController" id="3FP-fe-ZbK" customClass="ScanImageViewController" customModule="Personal_Word_Trainer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dLj-RB-g1z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="1zb-i6-tdx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cRY-cc-8co" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3462" y="-640"/>
         </scene>
         <!--Text Edit View Controller-->
         <scene sceneID="zbs-jh-hKU">
@@ -595,7 +618,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SUQ-QJ-wZT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3317.5999999999999" y="-117.48768472906404"/>
+            <point key="canvasLocation" x="3462" y="31"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r5T-GL-UBx">
