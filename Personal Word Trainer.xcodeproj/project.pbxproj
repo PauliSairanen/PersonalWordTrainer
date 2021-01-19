@@ -14,6 +14,7 @@
 		FA02416A25879BC100511C50 /* WordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02416825879BC100511C50 /* WordTableViewCell.swift */; };
 		FA02416B25879BC100511C50 /* WordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA02416925879BC100511C50 /* WordTableViewCell.xib */; };
 		FA13CF542588BB58008DB7EA /* TextEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA13CF532588BB58008DB7EA /* TextEditViewController.swift */; };
+		FA5BDFDB25B06F83004EE450 /* ScanImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5BDFDA25B06F83004EE450 /* ScanImageViewController.swift */; };
 		FA91771D258381E10009D5A3 /* LanguageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA91771C258381E10009D5A3 /* LanguageTableViewController.swift */; };
 		FA917723258382600009D5A3 /* LanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA917721258382600009D5A3 /* LanguageTableViewCell.swift */; };
 		FA917724258382600009D5A3 /* LanguageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA917722258382600009D5A3 /* LanguageTableViewCell.xib */; };
@@ -60,6 +61,7 @@
 		FA02416825879BC100511C50 /* WordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordTableViewCell.swift; sourceTree = "<group>"; };
 		FA02416925879BC100511C50 /* WordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordTableViewCell.xib; sourceTree = "<group>"; };
 		FA13CF532588BB58008DB7EA /* TextEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditViewController.swift; sourceTree = "<group>"; };
+		FA5BDFDA25B06F83004EE450 /* ScanImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanImageViewController.swift; sourceTree = "<group>"; };
 		FA91771C258381E10009D5A3 /* LanguageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTableViewController.swift; sourceTree = "<group>"; };
 		FA917721258382600009D5A3 /* LanguageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTableViewCell.swift; sourceTree = "<group>"; };
 		FA917722258382600009D5A3 /* LanguageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LanguageTableViewCell.xib; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				FA13CF532588BB58008DB7EA /* TextEditViewController.swift */,
 				FAC04521259B252900FB4651 /* SelectGameTableViewController.swift */,
 				FAC04526259B2CDE00FB4651 /* GameViewController.swift */,
+				FA5BDFDA25B06F83004EE450 /* ScanImageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				FA91771D258381E10009D5A3 /* LanguageTableViewController.swift in Sources */,
 				FA13CF542588BB58008DB7EA /* TextEditViewController.swift in Sources */,
 				FA92CE312580DCCB00FE8F16 /* StartViewController.swift in Sources */,
+				FA5BDFDB25B06F83004EE450 /* ScanImageViewController.swift in Sources */,
 				FA92CE372580DCCB00FE8F16 /* Personal_Word_Trainer.xcdatamodeld in Sources */,
 				FA02416425879A5B00511C50 /* WordTableViewController.swift in Sources */,
 				FA02416A25879BC100511C50 /* WordTableViewCell.swift in Sources */,
