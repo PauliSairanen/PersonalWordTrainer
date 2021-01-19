@@ -54,6 +54,8 @@ class GameViewController: UIViewController, UITextViewDelegate {
 			language2Label.text = selectedLanguagesItem?.name2
 		}
 		
+
+		
 		guard let textToAnimate = wordPairArray[0].word1 else {return}
 		questionTextField.setTextAnimated(text: textToAnimate)
 		answerTextField.text = ""
