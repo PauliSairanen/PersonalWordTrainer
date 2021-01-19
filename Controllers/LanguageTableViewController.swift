@@ -19,6 +19,8 @@ class LanguageTableViewController: UITableViewController {
 		print(dataFilePath)
 		tableView.register(UINib(nibName: "LanguageTableViewCell", bundle: nil), forCellReuseIdentifier: "LanguageTableViewCell")
 		loadItems()
+		
+		
 	}
 	
 	
@@ -39,7 +41,7 @@ class LanguageTableViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 70
+		return 100
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,6 +50,7 @@ class LanguageTableViewController: UITableViewController {
 		cell.languageEmoji1.text = languageArray[indexPath.item].flag1
 		cell.languageName2.text = languageArray[indexPath.item].name2
 		cell.languageEmoji2.text = languageArray[indexPath.item].flag2
+		cell.contentView.layer.masksToBounds = true
 		return cell
 	}
 	
