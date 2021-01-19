@@ -16,6 +16,8 @@ class GameViewController: UIViewController, UITextViewDelegate {
 	@IBOutlet weak var language2Label: UILabel!
 	@IBOutlet weak var answerTextField: UITextView!
 	@IBOutlet weak var feedbackImage: UIImageView!
+	@IBOutlet weak var flag1Label: UILabel!
+	@IBOutlet weak var flag2Label: UILabel!
 	
 	let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 	let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -56,9 +58,14 @@ class GameViewController: UIViewController, UITextViewDelegate {
 		if isSwapped {
 			language1Label.text = selectedLanguagesItem?.name2
 			language2Label.text = selectedLanguagesItem?.name1
+			flag1Label.text = selectedLanguagesItem?.flag2
+			flag2Label.text = selectedLanguagesItem?.flag1
 		} else {
 			language1Label.text = selectedLanguagesItem?.name1
 			language2Label.text = selectedLanguagesItem?.name2
+			flag1Label.text = selectedLanguagesItem?.flag1
+			flag2Label.text = selectedLanguagesItem?.flag2
+			
 		}
 		guard let textToAnimate = wordPairArray[0].word1 else {return}
 		questionTextField.setTextAnimated(text: textToAnimate)
