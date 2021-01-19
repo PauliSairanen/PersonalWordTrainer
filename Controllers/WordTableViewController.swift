@@ -59,6 +59,15 @@ class WordTableViewController: UITableViewController {
 	
 	//MARK: - Buttons
 	
+	
+	@IBAction func scanImageForWords(_ sender: UIBarButtonItem) {
+		if let vc = storyboard?.instantiateViewController(identifier: "scanImageViewController") as? ScanImageViewController {
+			// Add: delegate = self
+			self.navigationController?.pushViewController(vc, animated: true)
+			
+		}
+	}
+	
 	// Add new entries
 	@IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
 		// Perform segue to EditViewController to add text
@@ -83,22 +92,6 @@ class WordTableViewController: UITableViewController {
 			self.navigationController?.pushViewController(vc, animated: true)
 		}
 	}
-	
-	
-//	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//
-//
-//
-//		performSegue(withIdentifier: "goToEditScreen", sender: self)
-//	}
-//	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//		let destinationVC = segue.destination as! TextEditViewController
-//		if let indexpath = tableView.indexPathForSelectedRow {
-//			destinationVC.selectedLangagesItem = selectedLanguagesItem
-//			destinationVC.selectedWordPair = wordPairArray[indexpath.item]
-//		}
-//	}
 	
 	//MARK: - Data manipulation methods (Save, Read)
 	func saveItems() {
@@ -129,6 +122,12 @@ class WordTableViewController: UITableViewController {
 		}
 		self.tableView.reloadData()
 	}
+	
+	
+
+	
+	
+	
 }
 
 //MARK: - Extensions
