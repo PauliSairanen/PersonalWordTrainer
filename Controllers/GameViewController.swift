@@ -39,6 +39,13 @@ class GameViewController: UIViewController, UITextViewDelegate {
 		checkAnswer()
 	}
 	
+	override func viewWillDisappear(_ animated: Bool) {
+		if self.isMovingFromParent {
+			if isSwapped == true {
+				swapLanguages()
+			}
+		}
+	}
 	
 	
 	
@@ -53,9 +60,6 @@ class GameViewController: UIViewController, UITextViewDelegate {
 			language1Label.text = selectedLanguagesItem?.name1
 			language2Label.text = selectedLanguagesItem?.name2
 		}
-		
-
-		
 		guard let textToAnimate = wordPairArray[0].word1 else {return}
 		questionTextField.setTextAnimated(text: textToAnimate)
 		answerTextField.text = ""
@@ -77,7 +81,8 @@ class GameViewController: UIViewController, UITextViewDelegate {
 				let currentProgress = (Float(correctAnswers) / Float(amountOfQuestion))
 				print(currentProgress)
 				progressBar.setProgress(Float(currentProgress), animated: true)
-			}}
+			}
+		}
 	}
 	
 	func compareWords(index: Int) -> Bool {
@@ -116,7 +121,6 @@ class GameViewController: UIViewController, UITextViewDelegate {
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 				self.present(alert, animated: true, completion: nil)
 			}
-			
 			updateProgressBar()
 			feedbackImage.isHidden = false
 			feedbackImage.image = UIImage(systemName: "hand.thumbsdown.fill")
@@ -148,7 +152,11 @@ class GameViewController: UIViewController, UITextViewDelegate {
 			}}
 	}
 	
-	
+	func swapLanguages() {
+		for index in 0...self.totalQuestions!-1 {
+			swap(&self.wordPairArray[index].word1, &self.wordPairArray[index].word2)
+		}
+	}
 	
 	
 	//MARK: - Buttons
@@ -160,9 +168,7 @@ class GameViewController: UIViewController, UITextViewDelegate {
 	@IBAction func swapLanguages(_ sender: UIButton) {
 		let alert = UIAlertController(title: "Swapping languages will reset practice", message: "Swap languages?", preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(UIAlertAction) in
-			for index in 0...self.totalQuestions!-1 {
-				swap(&self.wordPairArray[index].word1, &self.wordPairArray[index].word2)
-			}
+			self.swapLanguages()
 			self.isSwapped = !self.isSwapped
 			self.resetGame()
 		}))
