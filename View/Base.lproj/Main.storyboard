@@ -226,21 +226,67 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o7j-Cg-Sjn">
                                         <rect key="frame" x="0.0" y="265.33333333333331" width="375" height="106.33333333333331"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvO-Sh-A6G">
-                                                <rect key="frame" x="160.33333333333334" y="30.333333333333375" width="54.666666666666657" height="45.333333333333343"/>
-                                                <state key="normal">
-                                                    <imageReference key="image" image="arrow.triangle.2.circlepath" catalog="system" symbolScale="default"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="swapLanguages:" destination="GQx-b0-0p2" eventType="touchUpInside" id="Vfu-o8-Csu"/>
-                                                </connections>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="SeG-B9-G6L">
+                                                <rect key="frame" x="10" y="10" width="355" height="86.333333333333329"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="xWg-iu-EIG">
+                                                        <rect key="frame" x="0.0" y="0.0" width="177.66666666666666" height="86.333333333333329"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shuffle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyL-li-jsy">
+                                                                <rect key="frame" x="0.0" y="0.0" width="177.66666666666666" height="43"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WMi-Y3-STN">
+                                                                <rect key="frame" x="0.0" y="43" width="177.66666666666666" height="43.333333333333343"/>
+                                                                <subviews>
+                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="Shuffle" translatesAutoresizingMaskIntoConstraints="NO" id="EXa-8I-Jep">
+                                                                        <rect key="frame" x="64.333333333333329" y="6.3333333333333712" width="51" height="31"/>
+                                                                        <connections>
+                                                                            <action selector="switchPressed:" destination="GQx-b0-0p2" eventType="valueChanged" id="rkD-wE-wqL"/>
+                                                                        </connections>
+                                                                    </switch>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="EXa-8I-Jep" firstAttribute="centerY" secondItem="WMi-Y3-STN" secondAttribute="centerY" id="4NF-cg-bQ7"/>
+                                                                    <constraint firstItem="EXa-8I-Jep" firstAttribute="centerX" secondItem="WMi-Y3-STN" secondAttribute="centerX" id="V9U-iM-OTS"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="eF7-TD-nUQ">
+                                                        <rect key="frame" x="177.66666666666663" y="0.0" width="177.33333333333337" height="86.333333333333329"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swap" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hB-ZK-Oqf">
+                                                                <rect key="frame" x="0.0" y="0.0" width="177.33333333333334" height="43"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvO-Sh-A6G">
+                                                                <rect key="frame" x="0.0" y="43" width="177.33333333333334" height="43.333333333333343"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <state key="normal">
+                                                                    <imageReference key="image" image="arrow.triangle.2.circlepath" catalog="system" symbolScale="default"/>
+                                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="swapLanguages:" destination="GQx-b0-0p2" eventType="touchUpInside" id="Vfu-o8-Csu"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
-                                            <constraint firstItem="uvO-Sh-A6G" firstAttribute="centerX" secondItem="o7j-Cg-Sjn" secondAttribute="centerX" id="1b2-TK-SkG"/>
-                                            <constraint firstItem="uvO-Sh-A6G" firstAttribute="centerY" secondItem="o7j-Cg-Sjn" secondAttribute="centerY" id="pkN-d7-29q"/>
+                                            <constraint firstItem="SeG-B9-G6L" firstAttribute="leading" secondItem="o7j-Cg-Sjn" secondAttribute="leading" constant="10" id="PGH-4H-hyx"/>
+                                            <constraint firstAttribute="trailing" secondItem="SeG-B9-G6L" secondAttribute="trailing" constant="10" id="eGC-sr-Hs4"/>
+                                            <constraint firstItem="SeG-B9-G6L" firstAttribute="top" secondItem="o7j-Cg-Sjn" secondAttribute="top" constant="10" id="llL-Hj-vwv"/>
+                                            <constraint firstAttribute="bottom" secondItem="SeG-B9-G6L" secondAttribute="bottom" constant="10" id="pP8-Fq-HBU"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yjo-BO-Z5E">
@@ -434,39 +480,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add or Edit words" id="tR6-uc-gVq">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="JgR-8n-qWz">
-                                <connections>
-                                    <action selector="addButtonPressed:" destination="uCS-ZT-x4l" id="rJg-IA-Bob"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="camera" id="qad-7T-LeL">
-                                <connections>
-                                    <action selector="scanImageForWords:" destination="uCS-ZT-x4l" id="GoQ-wJ-ggt"/>
-                                    <segue destination="3FP-fe-ZbK" kind="presentation" identifier="goToScanImageScreen" id="lGp-tw-IE3"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="JgR-8n-qWz">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="uCS-ZT-x4l" id="rJg-IA-Bob"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PXD-e1-SXz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2575" y="-117"/>
-        </scene>
-        <!--Scan Image View Controller-->
-        <scene sceneID="yK0-65-Ztp">
-            <objects>
-                <viewController storyboardIdentifier="scanImageViewController" id="3FP-fe-ZbK" customClass="ScanImageViewController" customModule="Personal_Word_Trainer" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dLj-RB-g1z">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="1zb-i6-tdx"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cRY-cc-8co" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3462" y="-640"/>
         </scene>
         <!--Text Edit View Controller-->
         <scene sceneID="zbs-jh-hKU">
@@ -646,7 +669,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SUQ-QJ-wZT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3462" y="31"/>
+            <point key="canvasLocation" x="3442" y="-117"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r5T-GL-UBx">
