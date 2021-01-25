@@ -59,15 +59,6 @@ class WordTableViewController: UITableViewController {
 	
 	//MARK: - Buttons
 	
-	
-	@IBAction func scanImageForWords(_ sender: UIBarButtonItem) {
-		if let vc = storyboard?.instantiateViewController(identifier: "scanImageViewController") as? ScanImageViewController {
-			// Add: delegate = self
-			self.navigationController?.pushViewController(vc, animated: true)
-			
-		}
-	}
-	
 	// Add new entries
 	@IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
 		// Perform segue to EditViewController to add text
