@@ -22,16 +22,19 @@ class GameViewController: UIViewController, UITextViewDelegate {
 	let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 	let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 	var wordPairArray = [WordPairs]()
+	var wordPairArrayInOrder = [WordPairs]()
 	var selectedLanguagesItem: LanguageItem?
 	var totalQuestions: Int?
 	var correctAnswers = 0
 	var currentProgress = 0
 	var isSwapped = false
-	var alertIsDisplaying = false
+	var isShuffled = false
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		loadItems()
+		wordPairArrayInOrder = wordPairArray // Store the original order
 		resetGame()
 		self.answerTextField.delegate = self
 		questionTextField.isEditable = false
@@ -41,10 +44,14 @@ class GameViewController: UIViewController, UITextViewDelegate {
 		checkAnswer()
 	}
 	
+	// Before exiting the game, reset state to default
 	override func viewWillDisappear(_ animated: Bool) {
 		if self.isMovingFromParent {
 			if isSwapped == true {
 				swapLanguages()
+			}
+			if isShuffled == true {
+				wordPairArray = wordPairArrayInOrder
 			}
 		}
 	}
@@ -67,6 +74,12 @@ class GameViewController: UIViewController, UITextViewDelegate {
 			flag2Label.text = selectedLanguagesItem?.flag2
 			
 		}
+		if isShuffled {
+			wordPairArray = wordPairArray.shuffled()
+		} else {
+			wordPairArray = wordPairArrayInOrder
+		}
+		
 		guard let textToAnimate = wordPairArray[0].word1 else {return}
 		questionTextField.setTextAnimated(text: textToAnimate)
 		answerTextField.text = ""
@@ -165,6 +178,7 @@ class GameViewController: UIViewController, UITextViewDelegate {
 		}
 	}
 	
+
 	
 	//MARK: - Buttons
 	
@@ -184,34 +198,51 @@ class GameViewController: UIViewController, UITextViewDelegate {
 	}
 	
 	
-	
-	
-	//MARK: - Data manipulation methods (Save, Read)
-	func saveItems() {
-		do {
-			try context.save()
-		} catch  {
-			print("Error saving context \(error)")
+	@IBAction func switchPressed(_ sender: UISwitch) {
+		if sender.isOn {
+			let alert = UIAlertController(title: "Shuffling languages will reset practice", message: "Shuffle languages?", preferredStyle: .alert)
+			alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(UIAlertAction) in
+				self.isShuffled = !self.isShuffled
+				self.resetGame()
+			}))
+			alert.addAction((UIAlertAction(title: "No", style: .default, handler: nil)))
+			self.present(alert, animated: true, completion: nil)
 		}
+		else {
+			self.isShuffled = !self.isShuffled
+			resetGame()
+		}
+}
+
+
+
+
+//MARK: - Data manipulation methods (Save, Read)
+func saveItems() {
+	do {
+		try context.save()
+	} catch  {
+		print("Error saving context \(error)")
 	}
-	
-	func loadItems(with request: NSFetchRequest<WordPairs> = WordPairs.fetchRequest(), predicate: NSPredicate? = nil) {
-		// Predicate for DB query is created, which will sort the results
-		let languageItemPredicate = NSPredicate(format: "parentLanguageItem.name1 MATCHES %@ AND parentLanguageItem.name2 MATCHES %@", selectedLanguagesItem!.name1!, selectedLanguagesItem!.name2! )
-		// Check if predicate from parameter exists and use both predicates
-		if let additionalPredicate = predicate {
-			request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [languageItemPredicate, additionalPredicate])
-			// Else use only the predicate defined earlier
-		} else {
-			request.predicate = languageItemPredicate
-		}
-		// Use request to fetch data using Core Data
-		do {
-			wordPairArray = try context.fetch(request)
-		} catch  {
-			print("Error fetching data from context \(error)")
-		}
+}
+
+func loadItems(with request: NSFetchRequest<WordPairs> = WordPairs.fetchRequest(), predicate: NSPredicate? = nil) {
+	// Predicate for DB query is created, which will sort the results
+	let languageItemPredicate = NSPredicate(format: "parentLanguageItem.name1 MATCHES %@ AND parentLanguageItem.name2 MATCHES %@", selectedLanguagesItem!.name1!, selectedLanguagesItem!.name2! )
+	// Check if predicate from parameter exists and use both predicates
+	if let additionalPredicate = predicate {
+		request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [languageItemPredicate, additionalPredicate])
+		// Else use only the predicate defined earlier
+	} else {
+		request.predicate = languageItemPredicate
 	}
+	// Use request to fetch data using Core Data
+	do {
+		wordPairArray = try context.fetch(request)
+	} catch  {
+		print("Error fetching data from context \(error)")
+	}
+}
 }
 
 
