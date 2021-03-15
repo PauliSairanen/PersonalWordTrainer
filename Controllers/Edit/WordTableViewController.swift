@@ -14,8 +14,13 @@ class WordTableViewController: UITableViewController {
 	let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 	var wordPairArray = [WordPairs]()
 	var selectedLanguagesItem: LanguageItem? {
-		didSet{
-			loadItems()
+		didSet {
+			print(selectedLanguagesItem)
+		}
+	}
+	var selectedCategory: Category? {
+		didSet {
+			loadItems(category: (selectedCategory?.categoryName!)!)
 		}
 	}
 	var lastSelectedIndexPath: IndexPath?
@@ -24,6 +29,10 @@ class WordTableViewController: UITableViewController {
 		super.viewDidLoad()
 		tableView.register(UINib(nibName: "WordTableViewCell", bundle: nil), forCellReuseIdentifier: "WordTableViewCell")
 		textEditView.delegate = self
+		
+//		print("Selected category = \(selectedLanguagesItem?.category)")
+//		print(selectedLanguagesItem)
+		
 	}
 	
 	// MARK: - Table view Methods
@@ -84,21 +93,23 @@ class WordTableViewController: UITableViewController {
 		}
 	}
 	
+	
+	
 	//MARK: - Data manipulation methods (Save, Read)
 	func saveItems() {
 		do {
 			try context.save()
+			print("Context Saved!")
 		} catch  {
 			print("Error saving context \(error)")
 		}
 		self.tableView.reloadData()
 	}
-	func loadItems(with request: NSFetchRequest<WordPairs> = WordPairs.fetchRequest(), predicate: NSPredicate? = nil) {
+	func loadItems(with request: NSFetchRequest<WordPairs> = WordPairs.fetchRequest(), predicate: NSPredicate? = nil, category: String) {
+		// Query CoreData using the category Name from previous screen
+		let languageItemPredicate = NSPredicate(format: "parentCategory.categoryName == %@", category)
 		
-		// Predicate for DB query is created, which will sort the results
-		let languageItemPredicate = NSPredicate(format: "parentLanguageItem.name1 MATCHES %@ AND parentLanguageItem.name2 MATCHES %@", selectedLanguagesItem!.name1!, selectedLanguagesItem!.name2! )
-		
-		// Check if predicate from parameter exists and use both predicates
+//		 Check if predicate from parameter exists and use both predicates
 		if let additionalPredicate = predicate {
 			request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [languageItemPredicate, additionalPredicate])
 			// Else use only the predicate defined earlier
@@ -115,9 +126,6 @@ class WordTableViewController: UITableViewController {
 	}
 	
 	
-
-	
-	
 	
 }
 
@@ -131,7 +139,7 @@ extension WordTableViewController: EditDataInModalDelegate {
 			let newWordPair = WordPairs(context: self.context)
 			newWordPair.word1 = editedText1
 			newWordPair.word2 = editedText2
-			newWordPair.parentLanguageItem = self.selectedLanguagesItem
+			newWordPair.parentCategory = self.selectedCategory
 			wordPairArray.append(newWordPair)
 			saveItems()
 			self.navigationController?.popViewController(animated: true)

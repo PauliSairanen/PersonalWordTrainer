@@ -16,6 +16,6 @@ target 'Personal Word Trainer' do
     # Pods for testing
   end
   
-pod 'IQKeyboardManagerSwift'
+
 
 end

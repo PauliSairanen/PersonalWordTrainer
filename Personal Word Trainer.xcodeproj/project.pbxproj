@@ -28,6 +28,10 @@
 		FA92CE522580DCCC00FE8F16 /* Personal_Word_TrainerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA92CE512580DCCC00FE8F16 /* Personal_Word_TrainerUITests.swift */; };
 		FAC04522259B252900FB4651 /* SelectGameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC04521259B252900FB4651 /* SelectGameTableViewController.swift */; };
 		FAC04527259B2CDE00FB4651 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC04526259B2CDE00FB4651 /* GameViewController.swift */; };
+		FAC8E31425C42B8C00756183 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8E31225C42B8C00756183 /* CategoryTableViewController.swift */; };
+		FAC8E31E25C42BE500756183 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8E31C25C42BE500756183 /* CategoryTableViewCell.swift */; };
+		FAC8E31F25C42BE500756183 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAC8E31D25C42BE500756183 /* CategoryTableViewCell.xib */; };
+		FAE0E75C25C810B90081D2C8 /* SelectCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE0E75B25C810B90081D2C8 /* SelectCategoryTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +84,10 @@
 		FA92CE532580DCCC00FE8F16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAC04521259B252900FB4651 /* SelectGameTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGameTableViewController.swift; sourceTree = "<group>"; };
 		FAC04526259B2CDE00FB4651 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		FAC8E31225C42B8C00756183 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
+		FAC8E31C25C42BE500756183 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+		FAC8E31D25C42BE500756183 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
+		FAE0E75B25C810B90081D2C8 /* SelectCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableViewController.swift; sourceTree = "<group>"; };
 		FEB8586DA8F0442907F09DE1 /* Pods-Personal Word Trainer-Personal Word TrainerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Personal Word Trainer-Personal Word TrainerUITests.release.xcconfig"; path = "Target Support Files/Pods-Personal Word Trainer-Personal Word TrainerUITests/Pods-Personal Word Trainer-Personal Word TrainerUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,6 +140,27 @@
 				48A114D38F20F2F898EB357E /* Pods-Personal Word TrainerTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		FA66D74C25C83933003DFE0E /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				FA91771C258381E10009D5A3 /* LanguageTableViewController.swift */,
+				FAC8E31225C42B8C00756183 /* CategoryTableViewController.swift */,
+				FA02416325879A5B00511C50 /* WordTableViewController.swift */,
+				FA13CF532588BB58008DB7EA /* TextEditViewController.swift */,
+			);
+			path = Edit;
+			sourceTree = "<group>";
+		};
+		FA66D74D25C8393B003DFE0E /* Practice */ = {
+			isa = PBXGroup;
+			children = (
+				FAC04521259B252900FB4651 /* SelectGameTableViewController.swift */,
+				FAE0E75B25C810B90081D2C8 /* SelectCategoryTableViewController.swift */,
+				FAC04526259B2CDE00FB4651 /* GameViewController.swift */,
+			);
+			path = Practice;
 			sourceTree = "<group>";
 		};
 		FA92CE202580DCCB00FE8F16 = {
@@ -205,6 +234,8 @@
 				FA917722258382600009D5A3 /* LanguageTableViewCell.xib */,
 				FA02416825879BC100511C50 /* WordTableViewCell.swift */,
 				FA02416925879BC100511C50 /* WordTableViewCell.xib */,
+				FAC8E31C25C42BE500756183 /* CategoryTableViewCell.swift */,
+				FAC8E31D25C42BE500756183 /* CategoryTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -213,11 +244,8 @@
 			isa = PBXGroup;
 			children = (
 				FA92CE302580DCCB00FE8F16 /* StartViewController.swift */,
-				FA91771C258381E10009D5A3 /* LanguageTableViewController.swift */,
-				FA02416325879A5B00511C50 /* WordTableViewController.swift */,
-				FA13CF532588BB58008DB7EA /* TextEditViewController.swift */,
-				FAC04521259B252900FB4651 /* SelectGameTableViewController.swift */,
-				FAC04526259B2CDE00FB4651 /* GameViewController.swift */,
+				FA66D74C25C83933003DFE0E /* Edit */,
+				FA66D74D25C8393B003DFE0E /* Practice */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -333,6 +361,7 @@
 				FA92CE3C2580DCCC00FE8F16 /* LaunchScreen.storyboard in Resources */,
 				FA92CE392580DCCC00FE8F16 /* Assets.xcassets in Resources */,
 				FA917724258382600009D5A3 /* LanguageTableViewCell.xib in Resources */,
+				FAC8E31F25C42BE500756183 /* CategoryTableViewCell.xib in Resources */,
 				FA92CE342580DCCB00FE8F16 /* Main.storyboard in Resources */,
 				FA02416B25879BC100511C50 /* WordTableViewCell.xib in Resources */,
 			);
@@ -469,10 +498,13 @@
 				FA02416425879A5B00511C50 /* WordTableViewController.swift in Sources */,
 				FA02416A25879BC100511C50 /* WordTableViewCell.swift in Sources */,
 				FA917723258382600009D5A3 /* LanguageTableViewCell.swift in Sources */,
+				FAE0E75C25C810B90081D2C8 /* SelectCategoryTableViewController.swift in Sources */,
 				FAC04522259B252900FB4651 /* SelectGameTableViewController.swift in Sources */,
 				FA92CE2D2580DCCB00FE8F16 /* AppDelegate.swift in Sources */,
 				FAC04527259B2CDE00FB4651 /* GameViewController.swift in Sources */,
 				FA92CE2F2580DCCB00FE8F16 /* SceneDelegate.swift in Sources */,
+				FAC8E31E25C42BE500756183 /* CategoryTableViewCell.swift in Sources */,
+				FAC8E31425C42B8C00756183 /* CategoryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +684,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FK2VR4UNT8;
 				INFOPLIST_FILE = "Personal Word Trainer/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -659,7 +692,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.PauliSairanen.Personal-Word-Trainer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -672,6 +705,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FK2VR4UNT8;
 				INFOPLIST_FILE = "Personal Word Trainer/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -679,7 +713,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.PauliSairanen.Personal-Word-Trainer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

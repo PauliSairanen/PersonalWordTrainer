@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Category" representedClassName=".Category" syncable="YES" codeGenerationType="class">
+        <attribute name="categoryName" optional="YES" attributeType="String"/>
+        <relationship name="parentLanguageItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LanguageItem" inverseName="categoryArray" inverseEntity="LanguageItem"/>
+        <relationship name="wordPairs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WordPairs" inverseName="parentCategory" inverseEntity="WordPairs"/>
+    </entity>
     <entity name="LanguageItem" representedClassName=".LanguageItem" syncable="YES" codeGenerationType="class">
         <attribute name="flag1" optional="YES" attributeType="String"/>
         <attribute name="flag2" optional="YES" attributeType="String"/>
         <attribute name="name1" attributeType="String"/>
         <attribute name="name2" attributeType="String"/>
-        <relationship name="wordPairs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WordPairs" inverseName="parentLanguageItem" inverseEntity="WordPairs"/>
+        <relationship name="categoryArray" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="parentLanguageItem" inverseEntity="Category"/>
     </entity>
     <entity name="WordPairs" representedClassName=".WordPairs" syncable="YES" codeGenerationType="class">
         <attribute name="word1" optional="YES" attributeType="String"/>
         <attribute name="word2" optional="YES" attributeType="String"/>
-        <relationship name="parentLanguageItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LanguageItem" inverseName="wordPairs" inverseEntity="LanguageItem"/>
+        <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="wordPairs" inverseEntity="Category"/>
     </entity>
     <elements>
-        <element name="LanguageItem" positionX="-236.747314453125" positionY="-101.9420166015625" width="128" height="118"/>
-        <element name="WordPairs" positionX="-9.236083984375" positionY="13.98724365234375" width="128" height="88"/>
+        <element name="Category" positionX="-39.1746826171875" positionY="-34.48068237304688" width="128" height="88"/>
+        <element name="LanguageItem" positionX="-274.7055053710938" positionY="-142.7710571289062" width="128.425048828125" height="118"/>
+        <element name="WordPairs" positionX="197.181640625" positionY="20.630615234375" width="128" height="88"/>
     </elements>
 </model>

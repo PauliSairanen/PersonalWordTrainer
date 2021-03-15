@@ -19,12 +19,7 @@ class LanguageTableViewController: UITableViewController {
 		print(dataFilePath)
 		tableView.register(UINib(nibName: "LanguageTableViewCell", bundle: nil), forCellReuseIdentifier: "LanguageTableViewCell")
 		loadItems()
-		
-		
 	}
-	
-	
-	
 	
 	
 	
@@ -75,11 +70,11 @@ class LanguageTableViewController: UITableViewController {
 	// MARK: - Navigation and Segues
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		performSegue(withIdentifier: "goToSelectWordpair", sender: self)
+		performSegue(withIdentifier: "goToCategoryView", sender: self)
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		let destinationVC = segue.destination as! WordTableViewController
+		let destinationVC = segue.destination as! CategoryTableViewController
 		// Pasing on value to the next ViewController
 		if let indexPath = tableView.indexPathForSelectedRow {
 			destinationVC.selectedLanguagesItem = languageArray[indexPath.item]

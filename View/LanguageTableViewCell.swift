@@ -8,7 +8,7 @@
 import UIKit
 
 class LanguageTableViewCell: UITableViewCell {
-
+	
 	@IBOutlet weak var languageName1: UILabel!
 	@IBOutlet weak var languageEmoji1: UILabel!
 	

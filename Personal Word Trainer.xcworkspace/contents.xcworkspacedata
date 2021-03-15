@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Personal Word Trainer.xcodeproj">
+      location = "group:/Users/macbook/Developer/iOS/Projects/Personal Word Trainer/Personal Word Trainer.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

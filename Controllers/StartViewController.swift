@@ -9,13 +9,12 @@ import UIKit
 
 class StartViewController: UIViewController {
 
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		// Do any additional setup after loading the view.
-	}
+	let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 
 	
-	
-	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		print(dataFilePath)
+	}
 }
 
