@@ -13,7 +13,10 @@ class CategoryTableViewController: UITableViewController {
 	let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 	let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 	var selectedLanguagesItem: LanguageItem? {
-		didSet{
+		didSet {
+//			loadItems(language1: (selectedLanguagesItem?.name1!)!, language2: (selectedLanguagesItem?.name2!)!)
+			print(selectedLanguagesItem!.name1!)
+			print(selectedLanguagesItem!.name2!)
 			loadItems()
 		}
 	}
@@ -100,15 +103,26 @@ class CategoryTableViewController: UITableViewController {
 		}
 		self.tableView.reloadData()
 	}
+	
+	
+	// Does not work for some reason!!!
+	
+
+	
 	func loadItems(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
+		let categoryPredicate = NSPredicate(format: "parentLanguageItem.name1 == %@ AND parentLanguageItem.name2 == %@", selectedLanguagesItem!.name1!, selectedLanguagesItem!.name2!)
+		request.predicate = categoryPredicate
 		do {
 			categoryArray = try context.fetch(request)
+			print(categoryArray)
 		} catch  {
 			print("Error fetching data from context \(error)")
 		}
 		self.tableView.reloadData()
 	}
 	
-	
+
 	
 }
+
+
