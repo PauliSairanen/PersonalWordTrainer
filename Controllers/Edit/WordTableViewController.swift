@@ -30,9 +30,6 @@ class WordTableViewController: UITableViewController {
 		tableView.register(UINib(nibName: "WordTableViewCell", bundle: nil), forCellReuseIdentifier: "WordTableViewCell")
 		textEditView.delegate = self
 		
-//		print("Selected category = \(selectedLanguagesItem?.category)")
-//		print(selectedLanguagesItem)
-		
 	}
 	
 	// MARK: - Table view Methods

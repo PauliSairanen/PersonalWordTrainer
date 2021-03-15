@@ -47,40 +47,15 @@ class SelectGameTableViewController: UITableViewController {
 	
 	
 	
-	
 	// MARK: - Navigation and Segues
 	
+
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		performSegue(withIdentifier: "goToSelectCategoryView", sender: self)
-	}
-	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		let destinationVC = segue.destination as! SelectCategoryTableViewController
-		// Pasing on value to the next ViewController
-		if let indexPath = tableView.indexPathForSelectedRow {
-			destinationVC.selectedLanguagesItem = languageArray[indexPath.item]
+		if let vc = storyboard?.instantiateViewController(identifier: "SelectCategoryTableViewController") as? SelectCategoryTableViewController {
+			vc.selectedLanguagesItem = languageArray[indexPath.item]
+			self.navigationController?.pushViewController(vc, animated: true)
 		}
 	}
-	
-	
-//	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//		// If there are no words added, don´t enter practice mode
-//		loadWordPairs( language1: languageArray[indexPath.item].name1!, language2: languageArray[indexPath.item].name2!)
-//
-//		if wordPairArray.isEmpty {
-//			let alert = UIAlertController(title: "No words to practice", message: "Go add some words! ", preferredStyle: .alert)
-//			alert.addAction((UIAlertAction(title: "Ok", style: .default, handler: { (UIAlertAction) in
-//				self.dismiss(animated: true, completion: nil)
-//			})))
-//			self.present(alert, animated: true, completion: nil)
-//		} else {
-//			if let vc = storyboard?.instantiateViewController(identifier: "GameViewController") as? GameViewController {
-//				vc.selectedLanguagesItem = languageArray[indexPath.item]
-//				self.navigationController?.pushViewController(vc, animated: true)
-//			}
-//		}
-//	}
-//
 	
 	
 	
@@ -103,26 +78,5 @@ class SelectGameTableViewController: UITableViewController {
 		}
 		self.tableView.reloadData()
 	}
-	
-//	func loadWordPairs(with request: NSFetchRequest<WordPairs> = WordPairs.fetchRequest(), predicate: NSPredicate? = nil, language1: String, language2: String) {
-//		// Predicate for DB query is created, which will sort the results
-////		let languageItemPredicate = NSPredicate(format: "parentLanguageItem.category MATCHES %@ AND parentLanguageItem.name1 MATCHES %@ AND parentLanguageItem.name2 MATCHES %@", language1, language2 )
-//
-//		let languageItemPredicate = NSPredicate(format: "parentCategory MATCHES  %@", selectedCategory!.categoryName!)
-//		// Check if predicate from parameter exists and use both predicates
-//		if let additionalPredicate = predicate {
-//			request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [languageItemPredicate, additionalPredicate])
-//			// Else use only the predicate defined earlier
-//		} else {
-//			request.predicate = languageItemPredicate
-//		}
-//		// Use request to fetch data using Core Data
-//		do {
-//			wordPairArray = try context.fetch(request)
-//		} catch  {
-//			print("Error fetching data from context \(error)")
-//		}
-//		self.tableView.reloadData()
-//	}
 	
 }

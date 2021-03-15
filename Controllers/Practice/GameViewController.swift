@@ -30,14 +30,20 @@ class GameViewController: UIViewController, UITextViewDelegate {
 	var isSwapped = false
 	var isShuffled = false
 	
+	var selectedCategory: Category? {
+		didSet {
+			loadItems(category: (selectedCategory?.categoryName!)!)
+		}
+	}
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		loadItems()
-		wordPairArrayInOrder = wordPairArray // Store the original order
-		resetGame()
 		self.answerTextField.delegate = self
 		questionTextField.isEditable = false
+		loadItems(category: (selectedCategory?.categoryName!)!)
+		wordPairArrayInOrder = wordPairArray // Store the original order
+		resetGame()
 	}
 	
 	func textViewDidEndEditing(_ textView: UITextView) {
@@ -127,7 +133,7 @@ class GameViewController: UIViewController, UITextViewDelegate {
 			feedbackImage.isHidden = false
 			feedbackImage.image = UIImage(systemName: "hand.thumbsup.fill")
 			feedbackImage.tintColor = #colorLiteral(red: 0.1203318441, green: 0.503712378, blue: 0.09756665541, alpha: 1)
-			ifGameHasEnded()
+		
 		} else {
 			// Show correct answer in alert
 			guard let answer = wordPairArray[currentProgress-1].word2 else {return}
@@ -147,6 +153,7 @@ class GameViewController: UIViewController, UITextViewDelegate {
 			feedbackImage.tintColor = .red
 			print("Answer INCORRECT!")
 		}
+		ifGameHasEnded()
 	}
 	
 	func ifGameHasEnded() {
@@ -226,23 +233,26 @@ func saveItems() {
 	}
 }
 
-func loadItems(with request: NSFetchRequest<WordPairs> = WordPairs.fetchRequest(), predicate: NSPredicate? = nil) {
-	// Predicate for DB query is created, which will sort the results
-	let languageItemPredicate = NSPredicate(format: "parentLanguageItem.name1 MATCHES %@ AND parentLanguageItem.name2 MATCHES %@", selectedLanguagesItem!.name1!, selectedLanguagesItem!.name2! )
-	// Check if predicate from parameter exists and use both predicates
-	if let additionalPredicate = predicate {
-		request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [languageItemPredicate, additionalPredicate])
-		// Else use only the predicate defined earlier
-	} else {
-		request.predicate = languageItemPredicate
+	func loadItems(with request: NSFetchRequest<WordPairs> = WordPairs.fetchRequest(), predicate: NSPredicate? = nil, category: String) {
+		// Query CoreData using the category Name from previous screen
+		let languageItemPredicate = NSPredicate(format: "parentCategory.categoryName == %@", category)
+		
+		//		 Check if predicate from parameter exists and use both predicates
+		if let additionalPredicate = predicate {
+			request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [languageItemPredicate, additionalPredicate])
+			// Else use only the predicate defined earlier
+		} else {
+			request.predicate = languageItemPredicate
+		}
+		// Use request to fetch data using Core Data
+		do {
+			wordPairArray = try context.fetch(request)
+		} catch  {
+			print("Error fetching data from context \(error)")
+		}
 	}
-	// Use request to fetch data using Core Data
-	do {
-		wordPairArray = try context.fetch(request)
-	} catch  {
-		print("Error fetching data from context \(error)")
-	}
-}
+	
+	
 }
 
 
