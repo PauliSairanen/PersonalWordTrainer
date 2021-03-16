@@ -59,6 +59,7 @@ class CategoryTableViewController: UITableViewController {
 		alert.addAction(UIAlertAction(title: "Add", style: .default) { (action) in
 			let newCategory = Category(context: self.context)
 			newCategory.categoryName = categoryNameField.text
+			newCategory.parentLanguageItem = self.selectedLanguagesItem
 		
 			self.categoryArray.append(newCategory)
 			self.saveItems()
@@ -105,12 +106,8 @@ class CategoryTableViewController: UITableViewController {
 	}
 	
 	
-	// Does not work for some reason!!!
-	
-
-	
 	func loadItems(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
-		let categoryPredicate = NSPredicate(format: "parentLanguageItem.name1 == %@ AND parentLanguageItem.name2 == %@", selectedLanguagesItem!.name1!, selectedLanguagesItem!.name2!)
+		let categoryPredicate = NSPredicate(format: "parentLanguageItem == %@ ", selectedLanguagesItem!)
 		request.predicate = categoryPredicate
 		do {
 			categoryArray = try context.fetch(request)
