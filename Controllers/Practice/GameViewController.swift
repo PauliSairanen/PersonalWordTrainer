@@ -189,9 +189,6 @@ class GameViewController: UIViewController, UITextViewDelegate {
 	
 	//MARK: - Buttons
 	
-	@IBAction func checkAnswer(_ sender: UIButton) {
-		checkAnswer()
-	}
 	
 	@IBAction func swapLanguages(_ sender: UIButton) {
 		let alert = UIAlertController(title: "Swapping languages will reset practice", message: "Swap languages?", preferredStyle: .alert)
